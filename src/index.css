@@ -1,3 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+* {
+ margin: 0;
+ padding: 0;
+ outline: 0;
+ box-sizing: border-box;
+ text-decoration: none;
+}
+
+
+@layer base {
+ body {
+  @apply bg-nav
+ }
+}
+
+.header {
+ background: #3e3e3e
+}
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
