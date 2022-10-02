@@ -1,14 +1,21 @@
 import React, { useState, useContext, createContext, useEffect, useRef } from "react";
 import axios from "axios";
+import { useSelector, useDispatch } from 'react-redux'
+import { setScore } from "../redux/userSlice";
 
 const QuizContext = createContext();
 
 export const QuizProvider = ({ children }) => {
+ const dispatch = useDispatch()
+ const { score } = useSelector((state) => state.user.score)
  const Ref = useRef(null);
   const [quizData, setQuizData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [quiz1, setQuiz1] = useState();
+  const [currentQuestion, setCurrentQuestion] = useState(0)
+  const [showScore, setShowScore] = useState(false)
+  const [disabled, setDisabled] = useState(true)
  const [timer, setTimer] = useState("00:00:00");
+
 
  const [inputData, setInputData] = useState({
    difficulty: "easy",
@@ -34,7 +41,7 @@ export const QuizProvider = ({ children }) => {
   const getNewsData = async (difficulty, category) => {
     try {
       const res = await axios.get(
-       `${apiEndPoint}questions?apiKey=${apikey}&limit=15&category=${category}&difficulty=${difficulty}`
+        `${apiEndPoint}questions?apiKey=${apikey}&limit=15&category=${category}&difficulty=${difficulty}`
       );
       setQuizData(res.data);
     } catch (error) {
@@ -46,21 +53,17 @@ export const QuizProvider = ({ children }) => {
     const total = Date.parse(e) - Date.parse(new Date());
     const seconds = Math.floor((total / 1000) % 60);
     const minutes = Math.floor((total / 1000 / 60) % 60);
-    const hours = Math.floor((total / 1000 / 60 / 60) % 24);
     return {
       total,
-      hours,
       minutes,
       seconds,
     };
   };
 
   const startTimer = (e) => {
-    let { total, hours, minutes, seconds } = getTimeRemaining(e);
+    let { total, minutes, seconds } = getTimeRemaining(e);
     if (total >= 0) {
       setTimer(
-        (hours > 9 ? hours : "0" + hours) +
-          ":" +
           (minutes > 9 ? minutes : "0" + minutes) +
           ":" +
           (seconds > 9 ? seconds : "0" + seconds)
@@ -69,7 +72,7 @@ export const QuizProvider = ({ children }) => {
   };
 
   const clearTimer = (e) => {
-    setTimer("00:01:30");
+    setTimer("01:50");
     if (Ref.current) clearInterval(Ref.current);
     const id = setInterval(() => {
       startTimer(e);
@@ -80,17 +83,18 @@ export const QuizProvider = ({ children }) => {
   const getDeadTime = () => {
     let deadline = new Date();
 
-    deadline.setSeconds(deadline.getSeconds() + 90);
+    deadline.setSeconds(deadline.getSeconds() + 110);
     return deadline;
   };
 
   useEffect(() => {
     clearTimer(getDeadTime());
-  }, [quiz1]);
+  }, []);
 
   const onClickReset = () => {
     clearTimer(getDeadTime());
   };
+  
 
   return (
     <QuizContext.Provider
@@ -101,7 +105,10 @@ export const QuizProvider = ({ children }) => {
         getDeadTime,
         clearTimer,
         onClickReset,
-        onChangeInput
+        onChangeInput,
+        currentQuestion,
+        showScore,
+        disabled
       }}
     >
       {children}
