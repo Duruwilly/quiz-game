@@ -3,20 +3,22 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import { useSelector, useDispatch } from "react-redux";
 import { resetScore } from "../redux/userSlice";
+import { useGlobalContext } from "../context/ContextWrapper";
 
 const Result = () => {
+  const { quizData } = useGlobalContext();
   const { score } = useSelector((state) => state.user);
   const { name } = useSelector((state) => state.user.userInfo);
-  const [shareLinkCopied, setShareLinkCopied] = useState(false)
+  const [shareLinkCopied, setShareLinkCopied] = useState(false);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const restart = (e) => {
     e.preventDefault();
     dispatch(resetScore());
-    navigate('/')
+    navigate("/");
   };
 
   return (
@@ -37,31 +39,39 @@ const Result = () => {
           </p>
           <div className="mt-44 px-4">
             {shareLinkCopied && <p className="text-right">Link Copied!</p>}
-          <button
-            type="button"
-            className="bg-transparent border-2 border-indigo-800 w-full py-2 text-black text-xl rounded font-bold my-4" onClick={() => {navigator.clipboard.writeText(window.location.href)
-            setShareLinkCopied(true)
-          setTimeout(() => {
-            setShareLinkCopied(false)
-          }, 2000)
-        }}
+            <button
+              type="button"
+              className="bg-transparent border-2 border-indigo-800 w-full py-2 text-black text-xl rounded font-bold my-4"
+              onClick={() => {
+                navigator.clipboard.writeText(
+                  `i just took quizied code assessment and i got ${score} out of ${quizData.length} try yours too ${window.location.href}`
+                );
+                setShareLinkCopied(true);
+                setTimeout(() => {
+                  setShareLinkCopied(false);
+                }, 2000);
+              }}
             >
-            Share your score
-          </button>
-          <button
-            type="button"
-            className="bg-indigo-800 w-full py-2 text-white text-xl rounded font-bold"
-            onClick={restart}
+              Share your score
+            </button>
+            <button
+              type="button"
+              className="bg-indigo-800 w-full py-2 text-white text-xl rounded font-bold"
+              onClick={restart}
             >
-            Restart
-          </button>
-          <p className="text-center mt-6 font-semibold cursor-pointer" onClick={() => navigate('/')}>return back to home</p>
-            </div>
+              Restart
+            </button>
+            <p
+              className="text-center mt-6 font-semibold cursor-pointer"
+              onClick={() => navigate("/")}
+            >
+              return back to home
+            </p>
+          </div>
         </div>
       </div>
     </section>
   );
-}
+};
 
-
-export default Result
+export default Result;
