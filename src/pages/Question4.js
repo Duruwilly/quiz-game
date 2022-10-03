@@ -11,7 +11,7 @@ const Question4 = () => {
   const btnDisabledActive =
     "bg-indigo-500 w-full py-2 text-white text-xl rounded font-bold";
   const { gender } = useSelector((state) => state.user.userInfo);
-  const { quizData, timer, onClickReset, clearTimer, getDeadTime } =
+  const { quizData, timer, clearTimer, getDeadTime } =
     useGlobalContext();
 
   const navigate = useNavigate();
@@ -41,12 +41,7 @@ const Question4 = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate("/questions/question5");
-    onClickReset();
   };
-
-  const testing = quizData[0];
-
-  console.log(testing);
 
   return (
     <section className="flex justify-center items-center bg-gra">

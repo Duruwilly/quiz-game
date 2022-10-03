@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useGlobalContext } from "../context/ContextWrapper";
 import { setScore } from "../redux/userSlice";
 
@@ -10,9 +10,7 @@ const Question15 = () => {
     "bg-indigo-800 w-full py-2 text-white text-xl rounded font-bold";
   const btnDisabledActive =
     "bg-indigo-500 w-full py-2 text-white text-xl rounded font-bold";
-  const { gender } = useSelector((state) => state.user.userInfo);
-  const { quizData, timer, onClickReset, clearTimer, getDeadTime } =
-    useGlobalContext();
+  const { quizData, timer, clearTimer, getDeadTime } = useGlobalContext();
 
   const navigate = useNavigate();
 
@@ -41,12 +39,7 @@ const Question15 = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate("/result");
-    onClickReset();
   };
-
-  const testing = quizData[0];
-
-  console.log(testing);
 
   return (
     <section className="flex justify-center items-center bg-gra">

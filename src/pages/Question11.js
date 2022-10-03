@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useGlobalContext } from "../context/ContextWrapper";
 import { setScore } from "../redux/userSlice";
 
@@ -10,8 +10,7 @@ const Question11 = () => {
     "bg-indigo-800 w-full py-2 text-white text-xl rounded font-bold";
   const btnDisabledActive =
     "bg-indigo-500 w-full py-2 text-white text-xl rounded font-bold";
-  const { gender } = useSelector((state) => state.user.userInfo);
-  const { quizData, timer, onClickReset, clearTimer, getDeadTime } =
+  const { quizData, timer, clearTimer, getDeadTime } =
     useGlobalContext();
 
   const navigate = useNavigate();
@@ -41,12 +40,7 @@ const Question11 = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate("/questions/question12");
-    onClickReset();
   };
-
-  const testing = quizData[0];
-
-  console.log(testing);
 
   return (
     <section className="flex justify-center items-center bg-gra">
@@ -58,7 +52,9 @@ const Question11 = () => {
             <span>Question 11/{quizData.length}</span>
           </div>
           <div className="mt-5">
-            <p className="bg-white py-4 px-3 shadow">{quizData[10]?.question}</p>
+            <p className="bg-white py-4 px-3 shadow">
+              {quizData[10]?.question}
+            </p>
             <form
               key={quizData[10]?.id}
               onSubmit={handleSubmit}

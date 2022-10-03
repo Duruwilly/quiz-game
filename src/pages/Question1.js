@@ -15,7 +15,6 @@ const Question1 = () => {
     timer,
     clearTimer,
     getDeadTime,
-    onClickReset,
   } = useGlobalContext();
 
   const navigate = useNavigate()
@@ -48,11 +47,6 @@ const Question1 = () => {
     navigate('/questions/question2')
     
   };
-
-  
-  const testing = quizData[0]
-  
-  console.log(testing)
 
   return (
     <section className="flex justify-center items-center bg-gra">
