@@ -5,13 +5,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { useGlobalContext } from "../context/ContextWrapper";
 import { setScore } from "../redux/userSlice";
 
-const Question2 = () => {
+const Question14 = () => {
   const btnDisabled =
     "bg-indigo-800 w-full py-2 text-white text-xl rounded font-bold";
   const btnDisabledActive =
     "bg-indigo-500 w-full py-2 text-white text-xl rounded font-bold";
   const { gender } = useSelector((state) => state.user.userInfo);
-  const { quizData, timer, onClickReset, clearTimer, getDeadTime } = useGlobalContext();
+  const { quizData, timer, onClickReset, clearTimer, getDeadTime } =
+    useGlobalContext();
 
   const navigate = useNavigate();
 
@@ -20,11 +21,11 @@ const Question2 = () => {
 
   const disableBtn = () => {
     if (timer === "00:00") {
-      navigate("/questions/question3");
+      navigate("/questions/question15");
     }
   };
 
-  disableBtn()
+  disableBtn();
 
   useEffect(() => {
     clearTimer(getDeadTime());
@@ -39,7 +40,7 @@ const Question2 = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/questions/question3");
+    navigate("/questions/question15");
     onClickReset();
   };
 
@@ -50,33 +51,31 @@ const Question2 = () => {
   return (
     <section className="flex justify-center items-center bg-gra">
       <div className="w-full max-w-screen-sm bg-gray h-screen pb-10">
-        <Header
-          title={
-            gender === "female" ? `you've got this girl` : `you've got this boy`
-          }
-        />
+        <Header title="bravo, a step closer" />
         <div className="px- mt-4">
           <div className="flex justify-between items-center px-4">
             <p className=" text-sm text-gray-600">{timer}</p>
-            <span>Question 2/{quizData.length}</span>
+            <span>Question 14/{quizData.length}</span>
           </div>
           <div className="mt-5">
-            <p className="bg-white py-4 px-3 shadow">{quizData[1]?.question}</p>
+            <p className="bg-white py-4 px-3 shadow">
+              {quizData[13]?.question}
+            </p>
             <form
-              key={quizData[1]?.id}
+              key={quizData[13]?.id}
               onSubmit={handleSubmit}
               className="space-y-2 mt-4 px-4"
             >
-              {quizData[1]?.answers?.answer_a !== null && (
+              {quizData[13]?.answers?.answer_a !== null && (
                 <div className="bg-white py-5 px-3 rounded-lg">
                   <label className="container">
-                    <p>{quizData[1]?.answers?.answer_a}</p>
+                    <p>{quizData[13]?.answers?.answer_a}</p>
                     <input
                       type="radio"
                       name="radio"
                       onClick={() =>
                         handleAnswerClick(
-                          quizData[1]?.correct_answers?.answer_a_correct
+                          quizData[13]?.correct_answers?.answer_a_correct
                         )
                       }
                     />
@@ -84,16 +83,16 @@ const Question2 = () => {
                   </label>
                 </div>
               )}
-              {quizData[1]?.answers?.answer_b !== null && (
+              {quizData[13]?.answers?.answer_b !== null && (
                 <div className="bg-white py-5 px-3 rounded-lg">
                   <label className="container">
-                    <p>{quizData[1]?.answers?.answer_b}</p>
+                    <p>{quizData[13]?.answers?.answer_b}</p>
                     <input
                       type="radio"
                       name="radio"
                       onClick={() =>
                         handleAnswerClick(
-                          quizData[1]?.correct_answers?.answer_b_correct
+                          quizData[13]?.correct_answers?.answer_b_correct
                         )
                       }
                     />
@@ -101,16 +100,16 @@ const Question2 = () => {
                   </label>
                 </div>
               )}
-              {quizData[1]?.answers?.answer_c !== null && (
+              {quizData[13]?.answers?.answer_c !== null && (
                 <div className="bg-white py-5 px-3 rounded-lg">
                   <label className="container">
-                    <p>{quizData[1]?.answers?.answer_c}</p>
+                    <p>{quizData[13]?.answers?.answer_c}</p>
                     <input
                       type="radio"
                       name="radio"
                       onClick={() =>
                         handleAnswerClick(
-                          quizData[1]?.correct_answers?.answer_c_correct
+                          quizData[13]?.correct_answers?.answer_c_correct
                         )
                       }
                     />
@@ -118,16 +117,16 @@ const Question2 = () => {
                   </label>
                 </div>
               )}
-              {quizData[1]?.answers?.answer_d !== null && (
+              {quizData[13]?.answers?.answer_d !== null && (
                 <div className="bg-white py-5 px-3 rounded-lg">
                   <label className="container">
-                    <p>{quizData[1]?.answers?.answer_d}</p>
+                    <p>{quizData[13]?.answers?.answer_d}</p>
                     <input
                       type="radio"
                       name="radio"
                       onClick={() =>
                         handleAnswerClick(
-                          quizData[1]?.correct_answers?.answer_d_correct
+                          quizData[13]?.correct_answers?.answer_d_correct
                         )
                       }
                     />
@@ -150,4 +149,4 @@ const Question2 = () => {
   );
 };
 
-export default Question2;
+export default Question14;

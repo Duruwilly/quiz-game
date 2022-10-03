@@ -82,10 +82,6 @@ export const QuizProvider = ({ children }) => {
     return deadline;
   };
 
-  useEffect(() => {
-    clearTimer(getDeadTime());
-  }, []);
-
   const onClickReset = () => {
     clearTimer(getDeadTime());
   };

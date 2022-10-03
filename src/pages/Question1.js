@@ -13,6 +13,8 @@ const Question1 = () => {
   const {
     quizData,
     timer,
+    clearTimer,
+    getDeadTime,
     onClickReset,
   } = useGlobalContext();
 
@@ -27,9 +29,12 @@ const Question1 = () => {
     }
   };
 
-  useEffect(() => {
    disableBtn()
-  })
+
+   useEffect(() => {
+    clearTimer(getDeadTime());
+  }, []);
+  
 
   const handleAnswerClick = (isCorrect) => {
     if (isCorrect === "true") {
@@ -51,7 +56,7 @@ const Question1 = () => {
 
   return (
     <section className="flex justify-center items-center bg-gra">
-      <div className="w-full max-w-screen-sm bg-gray h-screen">
+      <div className="w-full max-w-screen-sm bg-gray h-screen pb-10">
         <Header
           title={
             gender === "female" ? `you've got this girl` : `you've got this boy`
