@@ -51,7 +51,7 @@ const Home = () => {
          </select>
          
          <select name="" id="category" value={category} onChange={onChangeInput} className={inputStyle} required>
-          <option value="">select language/framework</option>
+          <option value="">select category</option>
           <option value="Code">Code</option>
           <option value="Linux">Linux</option>
           <option value="DevOps">DevOps</option>
