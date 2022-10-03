@@ -36,7 +36,7 @@ export const QuizProvider = ({ children }) => {
   const getNewsData = async (difficulty, category) => {
     try {
       const res = await axios.get(
-        `${apiEndPoint}questions?apiKey=${apikey}&limit=15&category=${category}&difficulty=${difficulty}`
+        `https://quizapi.io/api/v1/questions?apiKey=NTSvRVhgcwTwWLRyffN8p3kpK98ps3gALsOhhz1P&limit=15&category=${category}&difficulty=${difficulty}`
       );
       setQuizData(res.data);
     } catch (error) {

@@ -40,7 +40,7 @@ const Question2 = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate("/questions/question3");
-    onClickReset();
+   
   };
 
   const testing = quizData[0];

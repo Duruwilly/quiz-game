@@ -4,7 +4,7 @@ import Header from '../components/Header'
 import { useGlobalContext } from '../context/ContextWrapper'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { register } from '../redux/userSlice'
+import { register, resetScore } from '../redux/userSlice'
 
 const Home = () => {
   const { difficulty, category, onChangeInput, onClickReset } = useGlobalContext()
@@ -27,9 +27,14 @@ const Home = () => {
 
  const onSubmit = (e) => {
   e.preventDefault()
-  onClickReset()
+ 
   dispatch(register({ ...userData }))
     navigate('/questions/question1')
+ }
+
+ const restart = (e) => {
+  e.preventDefault()
+  dispatch(resetScore())
  }
 
  const { name, gender } = userData
@@ -39,7 +44,7 @@ const Home = () => {
       <div className='w-full max-w-screen-sm bg-gray h-screen'>
        <Header title={`welcome ${name}`} />
        <div className='px-4 mt-4'>
-       <button type='button' className='border-2 border-indigo-800 rounded-2xl px-3 text-lg text-gray-600'>Restart</button>
+       <button type='button' className='border-2 border-indigo-800 rounded-2xl px-3 text-lg text-gray-600' onClick={restart}>Restart</button>
        <main className='mt-10'>
         <form onSubmit={onSubmit} className='space-y-2'>
          <input type="text" id='name' placeholder='Your Name' value={name} onChange={onChange} className={inputStyle} required />

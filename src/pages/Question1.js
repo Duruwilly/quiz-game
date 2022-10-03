@@ -46,7 +46,7 @@ const Question1 = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate('/questions/question2')
-    onClickReset();
+    
   };
 
   
