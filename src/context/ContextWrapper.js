@@ -6,19 +6,14 @@ import { setScore } from "../redux/userSlice";
 const QuizContext = createContext();
 
 export const QuizProvider = ({ children }) => {
- const dispatch = useDispatch()
- const { score } = useSelector((state) => state.user.score)
  const Ref = useRef(null);
   const [quizData, setQuizData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [currentQuestion, setCurrentQuestion] = useState(0)
-  const [showScore, setShowScore] = useState(false)
-  const [disabled, setDisabled] = useState(true)
  const [timer, setTimer] = useState("00:00:00");
 
 
  const [inputData, setInputData] = useState({
-   difficulty: "easy",
+   difficulty: "",
    category: "",
  });
 
@@ -107,8 +102,7 @@ export const QuizProvider = ({ children }) => {
         onClickReset,
         onChangeInput,
         currentQuestion,
-        showScore,
-        disabled
+        setCurrentQuestion,
       }}
     >
       {children}
